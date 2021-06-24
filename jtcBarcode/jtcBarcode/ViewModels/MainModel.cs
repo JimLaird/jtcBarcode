@@ -52,14 +52,15 @@ namespace jtcBarcode.ViewModels
 
         private async Task DoShare()
         {
-            
             ZXing.BarcodeWriterSvg barcodeWriter = new ZXing.BarcodeWriterSvg
             {
                 Format = ZXing.BarcodeFormat.QR_CODE
             };
 
             var bcode = BarcodeVal;
-            barcodeWriter.Write(bcode);
+            var bitmap = barcodeWriter.Write(bcode);
+            
+            
 
             await Share.RequestAsync(new ShareTextRequest
             {
