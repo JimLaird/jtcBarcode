@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
+    xmlns:qrc="clr-namespace:QRCoder;assembly=QRCoder"
     xmlns:vm="clr-namespace:jtcBarcode.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
@@ -15,6 +16,12 @@
                                             Light={StaticResource TextColor}}"
     Shell.TitleColor="{AppThemeBinding Dark={StaticResource TextColorDark},
                                        Light={StaticResource TextColor}}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding SettingsCommand}">
@@ -87,24 +94,51 @@
                             Text="Create Barcode"
                             TextColor="White" />
                     </Frame>
-                    <Label Text="Enter Text To Encode" />
+                    <Label Style="{StaticResource LabelMedium}" Text="Enter Text To Encode" />
                     <Entry
                         x:Name="zBarcode"
                         Placeholder="Enter Text"
+                        Style="{StaticResource BaseEntry}"
                         Text="{Binding BarcodeVal, Mode=TwoWay}" />
+
                     <zxing:ZXingBarcodeImageView
                         x:Name="zxingBarcode"
                         BarcodeFormat="QR_CODE"
                         BarcodeValue="{Binding BarcodeVal, Mode=TwoWay}"
-                        HeightRequest="400"
+                        HeightRequest="320"
                         Visual="Material"
-                        WidthRequest="400">
+                        WidthRequest="320">
                         <zxing:ZXingBarcodeImageView.BarcodeOptions>
-                            <zxingc:EncodingOptions Width="400" Height="400" />
+                            <zxingc:EncodingOptions Width="320" Height="320" />
                         </zxing:ZXingBarcodeImageView.BarcodeOptions>
                     </zxing:ZXingBarcodeImageView>
+                    <StackLayout
+                        Padding="0,0,20,0"
+                        HorizontalOptions="EndAndExpand"
+                        Orientation="Horizontal"
+                        Spacing="20">
+                        <Label
+                            FontFamily="FAS"
+                            IsVisible="{Binding BarcodeVal, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                            Style="{StaticResource LabelMedium}"
+                            Text="{StaticResource IconPrint}"
+                            VerticalTextAlignment="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PrintCommand}" NumberOfTapsRequired="1" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label
+                            FontFamily="FAS"
+                            IsVisible="{Binding BarcodeVal, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                            Style="{StaticResource LabelMedium}"
+                            Text="{StaticResource IconShare}"
+                            VerticalTextAlignment="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShareCommand}" NumberOfTapsRequired="1" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
 
-                    <Button Command="{Binding ShareCommand}" Text="Share Barcode" />
                 </StackLayout>
             </xct:TabViewItem.Content>
         </xct:TabViewItem>

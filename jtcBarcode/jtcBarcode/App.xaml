@@ -143,6 +143,11 @@
             <x:String x:Key="IconEnvelope-Square">&#xf199;</x:String>
             <x:String x:Key="IconAt">&#xf1fa;</x:String>
             <x:String x:Key="IconProfile">&#xf2bd;</x:String>
+            <x:String x:Key="IconPrint">&#xf02f;</x:String>
+            <x:String x:Key="IconQRCode">&#xf029;</x:String>
+            <x:String x:Key="IconBarcode">&#xf02a;</x:String>
+            <x:String x:Key="IconSave">&#xf0c7;</x:String>
+            <x:String x:Key="IconShare">&#xf1e0;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

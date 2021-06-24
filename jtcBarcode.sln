@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jtcBarcode.Android", "jtcBa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jtcBarcode.iOS", "jtcBarcode\jtcBarcode.iOS\jtcBarcode.iOS.csproj", "{97ADC67E-9BCA-47A0-B78E-CB6059E22D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jtcBarcode", "jtcBarcode\jtcBarcode\jtcBarcode.csproj", "{24081E30-1EA7-423C-A544-1E96DF1B0DE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jtcBarcode", "jtcBarcode\jtcBarcode\jtcBarcode.csproj", "{24081E30-1EA7-423C-A544-1E96DF1B0DE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

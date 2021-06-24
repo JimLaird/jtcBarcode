@@ -19,6 +19,8 @@ namespace jtcBarcode.ViewModels
         public AsyncCommand SettingsCommand { get; }
         public AsyncCommand ShareCommand { get; }
 
+        public AsyncCommand PrintCommand { get; }
+
         public string BarcodeVal
         {
             get => barcodeVal;
@@ -36,6 +38,7 @@ namespace jtcBarcode.ViewModels
             AboutCommand = new AsyncCommand(GoAbout);
             SettingsCommand = new AsyncCommand(GoSettings);
             ShareCommand = new AsyncCommand(DoShare);
+            PrintCommand = new AsyncCommand(DoPrint);
         }
 
         private async Task GoAbout()
@@ -50,8 +53,14 @@ namespace jtcBarcode.ViewModels
             App.Current.MainPage.Navigation.PushAsync(new SettingsPage());
         }
 
+        private async Task DoPrint()
+        {
+            //  Print the barcode
+        }
+
         private async Task DoShare()
         {
+            //  Share the barcode
             ZXing.BarcodeWriterSvg barcodeWriter = new ZXing.BarcodeWriterSvg
             {
                 Format = ZXing.BarcodeFormat.QR_CODE
@@ -68,5 +77,7 @@ namespace jtcBarcode.ViewModels
                 Title = "Share !"
             });
         }
+
+        
     }
 }
