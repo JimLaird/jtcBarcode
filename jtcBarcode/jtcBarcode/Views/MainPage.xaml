@@ -106,7 +106,7 @@
                         BarcodeFormat="QR_CODE"
                         BarcodeValue="{Binding BarcodeVal, Mode=TwoWay}"
                         HeightRequest="320"
-                        Visual="Material"
+                        Visual="Default"
                         WidthRequest="320">
                         <zxing:ZXingBarcodeImageView.BarcodeOptions>
                             <zxingc:EncodingOptions Width="320" Height="320" />

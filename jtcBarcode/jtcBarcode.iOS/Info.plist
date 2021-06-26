@@ -36,5 +36,7 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Please allow access to the camera to scan barcode images.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Please allow access to store barcode images</string>
 </dict>
 </plist>

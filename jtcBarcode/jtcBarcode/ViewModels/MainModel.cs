@@ -9,6 +9,10 @@ using Xamarin.Essentials;
 using jtcBarcode.Views;
 using ZXing.Mobile;
 using ZXing.Common;
+using System.IO;
+using jtcBarcode.Services;
+
+
 
 namespace jtcBarcode.ViewModels
 {
@@ -44,37 +48,46 @@ namespace jtcBarcode.ViewModels
         private async Task GoAbout()
         {
             //
-            App.Current.MainPage.Navigation.PushAsync(new AboutPage());
+            await App.Current.MainPage.Navigation.PushAsync(new AboutPage());
         }
 
         private async Task GoSettings()
         {
             //
-            App.Current.MainPage.Navigation.PushAsync(new SettingsPage());
+            await App.Current.MainPage.Navigation.PushAsync(new SettingsPage());
         }
 
         private async Task DoPrint()
         {
             //  Print the barcode
+
         }
 
         private async Task DoShare()
         {
             //  Share the barcode
-            ZXing.BarcodeWriterSvg barcodeWriter = new ZXing.BarcodeWriterSvg
-            {
-                Format = ZXing.BarcodeFormat.QR_CODE
-            };
-
             var bcode = BarcodeVal;
-            var bitmap = barcodeWriter.Write(bcode);
-            
+
+
+            //  Call dependency service to create image stream in memory
+            IBarcodeService service = DependencyService.Get<IBarcodeService>();
+            Stream stream = service.ConvertImageStream(bcode, 320, 320);
             
 
-            await Share.RequestAsync(new ShareTextRequest
+            //  define filename
+            var dt = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
+            string fileName = Path.Combine(FileSystem.AppDataDirectory, dt + ".png");
+
+            //  Copy memorystream to a filestream object
+            using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
             {
-                Text = bcode,
-                Title = "Share !"
+                await stream.CopyToAsync(fileStream);
+            }
+
+            await Share.RequestAsync(new ShareFileRequest
+            {
+                Title = "Share ",
+                File = new ShareFile(fileName)
             });
         }
 
