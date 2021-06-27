@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
-    xmlns:qrc="clr-namespace:QRCoder;assembly=QRCoder"
+    xmlns:local="clr-namespace:jtcBarcode.Views"
     xmlns:vm="clr-namespace:jtcBarcode.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
@@ -51,29 +51,6 @@
     </ContentPage.BindingContext>
 
     <xct:TabView IsSwipeEnabled="False" TabStripPlacement="Bottom">
-        <xct:TabViewItem
-            BackgroundColor="{AppThemeBinding Dark={StaticResource SystemBlueDark},
-                                              Light={StaticResource SystemBlue}}"
-            FontAttributesSelected="Bold"
-            Text="Scan"
-            TextColor="{StaticResource SystemGray6}"
-            TextColorSelected="White">
-            <xct:TabViewItem.Content>
-                <StackLayout>
-                    <Frame
-                        Padding="24"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource SystemBlueDark},
-                                                          Light={StaticResource SystemBlue}}"
-                        CornerRadius="0">
-                        <Label
-                            FontSize="36"
-                            HorizontalTextAlignment="Center"
-                            Text="Scan Barcode"
-                            TextColor="White" />
-                    </Frame>
-                </StackLayout>
-            </xct:TabViewItem.Content>
-        </xct:TabViewItem>
         <xct:TabViewItem
             BackgroundColor="{AppThemeBinding Dark={StaticResource SystemPurpleDark},
                                               Light={StaticResource SystemPurple}}"
@@ -141,6 +118,64 @@
 
                 </StackLayout>
             </xct:TabViewItem.Content>
+        </xct:TabViewItem>
+        <xct:TabViewItem
+            BackgroundColor="{AppThemeBinding Dark={StaticResource SystemBlueDark},
+                                              Light={StaticResource SystemBlue}}"
+            FontAttributesSelected="Bold"
+            Text="Scan"
+            TextColor="{StaticResource SystemGray6}"
+            TextColorSelected="White">
+            <xct:TabViewItem.Content>
+                <StackLayout>
+                    <Frame
+                        Padding="24"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource SystemBlueDark},
+                                                          Light={StaticResource SystemBlue}}"
+                        CornerRadius="0">
+                        <Label
+                            FontSize="36"
+                            HorizontalTextAlignment="Center"
+                            Text="Scan Barcode"
+                            TextColor="White" />
+                    </Frame>
+
+                    <StackLayout
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Horizontal"
+                        Spacing="20">
+                        <Label Style="{StaticResource LabelMedium}" Text="Scan On:" />
+                        <Switch IsToggled="{Binding IsScanning, Mode=TwoWay}" />
+                        <Label Style="{StaticResource LabelMedium}" Text="Use Torch:" />
+                        <Switch IsToggled="{Binding IsTorchOn, Mode=TwoWay}" />
+                    </StackLayout>
+                    <!--<Grid HorizontalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="460" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="380" />
+                </Grid.ColumnDefinitions>
+                <zxing:ZXingDefaultOverlay
+                    x:Name="scannerOverlay"
+                    BottomText="Scanning.."
+                    TopText="Place Red Line Over Barcode">
+                    <zxing:ZXingScannerView
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        IsScanning="{Binding IsScanning}"
+                        IsTorchOn="{Binding IsTorchOn}"
+                        OnScanResult="ZXingScannerView_OnScanResult" />
+                </zxing:ZXingDefaultOverlay>
+            </Grid>-->
+                    <!--<zxing:ZXingScannerView
+                        IsScanning="True"
+                        IsTorchOn="False"
+                        OnScanResult="ZXingScannerView_OnScanResult" />-->
+                    <Label x:Name="txtResult" />
+                </StackLayout>
+            </xct:TabViewItem.Content>
+
         </xct:TabViewItem>
     </xct:TabView>
 

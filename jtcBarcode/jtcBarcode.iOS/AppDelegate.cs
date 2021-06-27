@@ -7,6 +7,7 @@ using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using ZXing.Mobile;
 
 [assembly: Dependency(typeof(jtcBarcode.iOS.Environment))]
 namespace jtcBarcode.iOS

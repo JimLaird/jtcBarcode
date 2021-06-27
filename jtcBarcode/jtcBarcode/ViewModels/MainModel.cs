@@ -35,6 +35,28 @@ namespace jtcBarcode.ViewModels
             }
         }
 
+        private bool isScanning;
+        public bool IsScanning
+        {
+            get => isScanning;
+            set
+            {
+                SetProperty(ref isScanning, value);
+                OnPropertyChanged();
+            }
+        }
+
+        private bool isTorchOn;
+        public bool IsTorchOn
+        {
+            get => isTorchOn;
+            set
+            {
+                SetProperty(ref isTorchOn, value);
+                OnPropertyChanged();
+            }
+        }
+
         public MainModel()
         {
             Title = "jtcBarcode";
@@ -43,6 +65,9 @@ namespace jtcBarcode.ViewModels
             SettingsCommand = new AsyncCommand(GoSettings);
             ShareCommand = new AsyncCommand(DoShare);
             PrintCommand = new AsyncCommand(DoPrint);
+
+            IsScanning = false;
+            IsTorchOn = false;
         }
 
         private async Task GoAbout()
@@ -60,7 +85,7 @@ namespace jtcBarcode.ViewModels
         private async Task DoPrint()
         {
             //  Print the barcode
-
+            await App.Current.MainPage.DisplayAlert("Future Feature", "Printing will be enabled in a future release", "OK");
         }
 
         private async Task DoShare()
@@ -86,7 +111,7 @@ namespace jtcBarcode.ViewModels
 
             await Share.RequestAsync(new ShareFileRequest
             {
-                Title = "Share ",
+                Title = "Share QR Code",
                 File = new ShareFile(fileName)
             });
         }

@@ -13,6 +13,7 @@ using jtcBarcode.Services;
 using System.IO;
 using ZXing.Mobile;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 [assembly: Dependency(typeof(jtcBarcode.Droid.BarcodeService))]
 namespace jtcBarcode.Droid
@@ -40,5 +41,7 @@ namespace jtcBarcode.Droid
 
             return stream;
         }
+
+        
     }
 }

@@ -20,5 +20,7 @@ namespace jtcBarcode
         {
             await Navigation.PushAsync(new SettingsPage());
         }
+
+        
     }
 }

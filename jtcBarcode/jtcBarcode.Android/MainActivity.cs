@@ -9,6 +9,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using jtcBarcode.Droid;
 using jtcBarcode.Helpers;
+using ZXing.Mobile;
 
 [assembly: Dependency(typeof(jtcBarcode.Droid.Environment))]
 namespace jtcBarcode.Droid
@@ -22,6 +23,7 @@ namespace jtcBarcode.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
+            
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
