@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using jtcBarcode.Views;
@@ -12,19 +12,13 @@ using ZXing.Common;
 using System.IO;
 using jtcBarcode.Services;
 
-
-
 namespace jtcBarcode.ViewModels
 {
-    public class MainModel : ViewModelBase
+    public class CreateModel : ViewModelBase
     {
         private string barcodeVal;
-        public AsyncCommand AboutCommand { get; }
-        public AsyncCommand SettingsCommand { get; }
         public AsyncCommand ShareCommand { get; }
-
         public AsyncCommand PrintCommand { get; }
-
         public string BarcodeVal
         {
             get => barcodeVal;
@@ -35,68 +29,13 @@ namespace jtcBarcode.ViewModels
             }
         }
 
-        private bool isScanning;
-        public bool IsScanning
+        
+        public CreateModel()
         {
-            get => isScanning;
-            set
-            {
-                SetProperty(ref isScanning, value);
-                OnPropertyChanged();
-            }
-        }
+            Title = "Create Barcode";
 
-        private bool isTorchOn;
-        public bool IsTorchOn
-        {
-            get => isTorchOn;
-            set
-            {
-                SetProperty(ref isTorchOn, value);
-                OnPropertyChanged();
-            }
-        }
-
-        public AsyncCommand ScanCommand { get; }
-        public AsyncCommand CreateCommand { get; }
-
-        public MainModel()
-        {
-            Title = "jtcBarcode";
-
-            AboutCommand = new AsyncCommand(GoAbout);
-            SettingsCommand = new AsyncCommand(GoSettings);
             ShareCommand = new AsyncCommand(DoShare);
             PrintCommand = new AsyncCommand(DoPrint);
-            ScanCommand = new AsyncCommand(GoScan);
-            CreateCommand = new AsyncCommand(GoCreate);
-
-            IsScanning = false;
-            IsTorchOn = false;
-        }
-
-        private async Task GoAbout()
-        {
-            //
-            await App.Current.MainPage.Navigation.PushAsync(new AboutPage());
-        }
-
-        private async Task GoScan()
-        {
-            //
-            await App.Current.MainPage.Navigation.PushAsync(new ScanPage());
-        }
-
-        private async Task GoCreate()
-        {
-            //
-            await App.Current.MainPage.Navigation.PushAsync(new CreatePage());
-        }
-
-        private async Task GoSettings()
-        {
-            //
-            await App.Current.MainPage.Navigation.PushAsync(new SettingsPage());
         }
 
         private async Task DoPrint()
@@ -114,7 +53,7 @@ namespace jtcBarcode.ViewModels
             //  Call dependency service to create image stream in memory
             IBarcodeService service = DependencyService.Get<IBarcodeService>();
             Stream stream = service.ConvertImageStream(bcode, 320, 320);
-            
+
 
             //  define filename
             var dt = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
@@ -132,7 +71,5 @@ namespace jtcBarcode.ViewModels
                 File = new ShareFile(fileName)
             });
         }
-
-        
     }
 }

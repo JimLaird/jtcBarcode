@@ -126,6 +126,18 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
 
+            <Style x:Key="ButtonMenu" TargetType="Button">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}" />
+                <Setter Property="WidthRequest" Value="240" />
+                <Setter Property="HeightRequest" Value="{OnPlatform iOS=90, Android=100}" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="BorderWidth" Value="2" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BorderColor" Value="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
             <Style x:Key="ShellTemplateCard" TargetType="Frame">
                 <Setter Property="HasShadow" Value="{OnPlatform iOS=false, Android=true, Default=true}" />
                 <Setter Property="CornerRadius" Value="20" />

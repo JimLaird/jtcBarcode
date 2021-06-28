@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="jtcBarcode.Views.ScanPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontAwesome="clr-namespace:FontAwesome"
+    xmlns:vm="clr-namespace:jtcBarcode.ViewModels"
+    xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+    Title="{Binding Title}"
+    x:DataType="vm:ScanModel"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource WindowBackgroundColorDark},
+                                      Light={StaticResource WindowBackgroundColor}}">
+
+    <ContentPage.BindingContext>
+        <vm:ScanModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame
+                Padding="24"
+                BackgroundColor="{AppThemeBinding Dark={StaticResource SystemBlueDark},
+                                                  Light={StaticResource SystemBlue}}"
+                CornerRadius="0">
+                <Label
+                    FontSize="36"
+                    HorizontalTextAlignment="Center"
+                    Text="Scan Barcode"
+                    TextColor="White" />
+            </Frame>
+
+            <StackLayout
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal"
+                Spacing="20">
+                <Label Style="{StaticResource LabelMedium}" Text="Scan On:" />
+                <Switch IsToggled="{Binding IsScanning, Mode=TwoWay}" />
+                <Label Style="{StaticResource LabelMedium}" Text="Use Torch:" />
+                <Switch IsToggled="{Binding IsTorchOn, Mode=TwoWay}" />
+            </StackLayout>
+
+            <Grid HorizontalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="460" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="380" />
+                </Grid.ColumnDefinitions>
+                <zxing:ZXingScannerView
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HeightRequest="460"
+                    IsScanning="{Binding IsScanning}"
+                    IsTorchOn="{Binding IsTorchOn}"
+                    MinimumHeightRequest="460"
+                    OnScanResult="ZXingScannerView_OnScanResult"
+                    Visual="Material"
+                    WidthRequest="380" />
+
+            </Grid>
+
+
+            <Label x:Name="txtResult" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

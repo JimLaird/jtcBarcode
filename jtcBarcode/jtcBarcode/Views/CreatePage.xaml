@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="jtcBarcode.Views.CreatePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontAwesome="clr-namespace:FontAwesome"
+    xmlns:vm="clr-namespace:jtcBarcode.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+    xmlns:zxingc="clr-namespace:ZXing.Common;assembly=zxing"
+    Title="{Binding Title}"
+    x:DataType="vm:CreateModel"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource WindowBackgroundColorDark},
+                                      Light={StaticResource WindowBackgroundColor}}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:CreateModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame
+                Padding="24"
+                BackgroundColor="{AppThemeBinding Dark={StaticResource SystemPurpleDark},
+                                                  Light={StaticResource SystemPurple}}"
+                CornerRadius="0">
+                <Label
+                    FontSize="36"
+                    HorizontalTextAlignment="Center"
+                    Text="Create Barcode"
+                    TextColor="White" />
+            </Frame>
+            <Label Style="{StaticResource LabelMedium}" Text="Enter Text To Encode" />
+            <Entry
+                x:Name="zBarcode"
+                Placeholder="Enter Text"
+                Style="{StaticResource BaseEntry}"
+                Text="{Binding BarcodeVal, Mode=TwoWay}" />
+
+            <zxing:ZXingBarcodeImageView
+                x:Name="zxingBarcode"
+                BarcodeFormat="QR_CODE"
+                BarcodeValue="{Binding BarcodeVal, Mode=TwoWay}"
+                HeightRequest="320"
+                Visual="Default"
+                WidthRequest="320">
+                <zxing:ZXingBarcodeImageView.BarcodeOptions>
+                    <zxingc:EncodingOptions Width="320" Height="320" />
+                </zxing:ZXingBarcodeImageView.BarcodeOptions>
+            </zxing:ZXingBarcodeImageView>
+            <StackLayout
+                Padding="0,0,20,0"
+                HorizontalOptions="EndAndExpand"
+                Orientation="Horizontal"
+                Spacing="20">
+                <Label
+                    FontFamily="FAS"
+                    IsVisible="{Binding BarcodeVal, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                    Style="{StaticResource LabelMedium}"
+                    Text="{StaticResource IconPrint}"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PrintCommand}" NumberOfTapsRequired="1" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    FontFamily="FAS"
+                    IsVisible="{Binding BarcodeVal, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                    Style="{StaticResource LabelMedium}"
+                    Text="{StaticResource IconShare}"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShareCommand}" NumberOfTapsRequired="1" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

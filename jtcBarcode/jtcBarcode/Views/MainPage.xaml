@@ -50,7 +50,25 @@
         <vm:MainModel />
     </ContentPage.BindingContext>
 
-    <xct:TabView IsSwipeEnabled="False" TabStripPlacement="Bottom">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="20"
+            HorizontalOptions="CenterAndExpand"
+            Orientation="Vertical"
+            Spacing="40"
+            VerticalOptions="Center">
+            <Button
+                Command="{Binding ScanCommand}"
+                Style="{StaticResource ButtonMenu}"
+                Text="Scan Barcode" />
+            <Button
+                Command="{Binding CreateCommand}"
+                Style="{StaticResource ButtonMenu}"
+                Text="Create QR Code" />
+        </StackLayout>
+    </ContentPage.Content>
+
+    <!--<xct:TabView IsSwipeEnabled="False" TabStripPlacement="Bottom">
         <xct:TabViewItem
             BackgroundColor="{AppThemeBinding Dark={StaticResource SystemPurpleDark},
                                               Light={StaticResource SystemPurple}}"
@@ -149,7 +167,8 @@
                         <Label Style="{StaticResource LabelMedium}" Text="Use Torch:" />
                         <Switch IsToggled="{Binding IsTorchOn, Mode=TwoWay}" />
                     </StackLayout>
-                    <!--<Grid HorizontalOptions="CenterAndExpand">
+    -->
+    <!--<Grid HorizontalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="460" />
                 </Grid.RowDefinitions>
@@ -168,15 +187,16 @@
                         OnScanResult="ZXingScannerView_OnScanResult" />
                 </zxing:ZXingDefaultOverlay>
             </Grid>-->
-                    <!--<zxing:ZXingScannerView
+    <!--<zxing:ZXingScannerView
                         IsScanning="True"
                         IsTorchOn="False"
                         OnScanResult="ZXingScannerView_OnScanResult" />-->
+    <!--
                     <Label x:Name="txtResult" />
                 </StackLayout>
             </xct:TabViewItem.Content>
 
         </xct:TabViewItem>
-    </xct:TabView>
+    </xct:TabView>-->
 
 </ContentPage>
