@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fontAwesome="clr-namespace:FontAwesome"
     xmlns:vm="clr-namespace:jtcBarcode.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
     Title="{Binding Title}"
     x:DataType="vm:ScanModel"
@@ -14,6 +15,12 @@
     <ContentPage.BindingContext>
         <vm:ScanModel />
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout>
@@ -38,6 +45,23 @@
                 <Label Style="{StaticResource LabelMedium}" Text="Use Torch:" />
                 <Switch IsToggled="{Binding IsTorchOn, Mode=TwoWay}" />
             </StackLayout>
+            <Label x:Name="txtResult" Text="{Binding BarcodeVal, Mode=TwoWay}" />
+            <StackLayout
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal"
+                Spacing="20">
+                <Button
+                    x:Name="btnCopy"
+                    Command="{Binding CopyCommand}"
+                    IsEnabled="{Binding BarcodeVal, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                    Style="{StaticResource ButtonOutline}"
+                    Text="Copy" />
+                <Button
+                    x:Name="btnAction"
+                    IsEnabled="{Binding BarcodeVal, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                    Style="{StaticResource ButtonOutline}"
+                    Text="Go" />
+            </StackLayout>
 
             <Grid HorizontalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
@@ -60,7 +84,8 @@
             </Grid>
 
 
-            <Label x:Name="txtResult" />
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
