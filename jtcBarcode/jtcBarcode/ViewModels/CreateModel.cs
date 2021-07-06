@@ -18,7 +18,6 @@ namespace jtcBarcode.ViewModels
     {
         private string barcodeVal;
         public AsyncCommand ShareCommand { get; }
-        public AsyncCommand PrintCommand { get; }
         public string BarcodeVal
         {
             get => barcodeVal;
@@ -35,15 +34,10 @@ namespace jtcBarcode.ViewModels
             Title = "Create Barcode";
 
             ShareCommand = new AsyncCommand(DoShare);
-            PrintCommand = new AsyncCommand(DoPrint);
+            
         }
 
-        private async Task DoPrint()
-        {
-            //  Print the barcode
-            await App.Current.MainPage.DisplayAlert("Future Feature", "Printing will be enabled in a future release", "OK");
-        }
-
+        
         private async Task DoShare()
         {
             //  Share the barcode

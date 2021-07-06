@@ -63,16 +63,6 @@
                     FontFamily="FAS"
                     IsVisible="{Binding BarcodeVal, Converter={StaticResource IsNotNullOrEmptyConverter}}"
                     Style="{StaticResource LabelMedium}"
-                    Text="{StaticResource IconPrint}"
-                    VerticalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding PrintCommand}" NumberOfTapsRequired="1" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label
-                    FontFamily="FAS"
-                    IsVisible="{Binding BarcodeVal, Converter={StaticResource IsNotNullOrEmptyConverter}}"
-                    Style="{StaticResource LabelMedium}"
                     Text="{StaticResource IconShare}"
                     VerticalTextAlignment="Center">
                     <Label.GestureRecognizers>

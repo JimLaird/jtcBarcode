@@ -10,7 +10,7 @@ using Xamarin.CommunityToolkit.Extensions;
 
 namespace jtcBarcode.ViewModels
 {
-    public class ScanModel :ViewModelBase
+    public class ScanModel : ViewModelBase
     {
         private bool isScanning;
         public bool IsScanning
